@@ -15,18 +15,7 @@
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
-        <activity
-            android:name=".DeatailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".powerpoint"
-            android:exported="false" />
-        <activity
-            android:name=".exel"
-            android:exported="false" />
-        <activity
-            android:name=".word"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

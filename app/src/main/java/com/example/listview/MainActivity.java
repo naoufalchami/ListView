@@ -1,12 +1,17 @@
-// MainActivity.java
 package com.example.listview;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,5 +51,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void takeScreenshot(View view) {
+        // Get the root view
+        View rootView = getWindow().getDecorView().getRootView();
+
+        // Create a Bitmap of the view
+        rootView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(rootView.getDrawingCache());
+        rootView.setDrawingCacheEnabled(false);
+
+        // Save the Bitmap to a file
+        File screenshotFile = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "screenshot_" + new Date().getTime() + ".png");
+        try {
+            FileOutputStream outputStream = new FileOutputStream(screenshotFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
